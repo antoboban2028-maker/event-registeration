@@ -1,110 +1,428 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Event Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #667eea, #764ba2);
-            text-align: center;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<title>Event Management System</title>
 
-        h1 {
-            color: white;
-            margin-top: 30px;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI";}
 
-        .container {
-            background: white;
-            padding: 25px;
-            width: 350px;
-            margin: 40px auto;
-            border-radius: 15px;
-            box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
-        }
+body{
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#0c4a6e);
+color:#e2e8f0;
+}
 
-        input, select, button {
-            width: 90%;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:center;
+gap:10px;
+padding:15px;
+background:#020617;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
 
-        button {
-            background-color: #667eea;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.navbar button{
+padding:8px 15px;
+border:none;
+border-radius:20px;
+background:#1e293b;
+color:#e2e8f0;
+cursor:pointer;
+font-weight:600;
+}
 
-        button:hover {
-            background-color: #5a67d8;
-        }
+.navbar button:hover{
+background:linear-gradient(135deg,#facc15,#f59e0b);
+color:#020617;
+}
 
-        #message {
-            margin-top: 15px;
-            font-weight: bold;
-            color: green;
-        }
+/* TITLE */
+h1{
+text-align:center;
+margin:20px;
+color:#facc15;
+}
 
-        .footer {
-            margin-top: 20px;
-            color: #ddd;
-            font-size: 12px;
-        }
-    </style>
+/* HERO */
+.hero{
+text-align:center;
+margin-top:10px;
+}
+
+.hero h2{
+color:#facc15;
+}
+
+.hero p{
+color:#cbd5f5;
+font-size:14px;
+}
+
+/* DASHBOARD */
+.dashboard{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.stat-card{
+background:#020617;
+padding:20px;
+border-radius:12px;
+width:180px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.5);
+}
+
+.stat-card h2{
+color:#facc15;
+}
+
+/* EVENT BOX */
+.event-preview{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+.event-box{
+background:#020617;
+padding:15px;
+border-radius:10px;
+width:150px;
+text-align:center;
+border:1px solid #334155;
+}
+
+.event-box:hover{
+border-color:#facc15;
+}
+
+/* CARD */
+.card{
+background:#020617;
+width:90%;
+max-width:450px;
+margin:25px auto;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.6);
+text-align:center;
+}
+
+/* INPUT */
+input,select{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #334155;
+background:#0f172a;
+color:#e2e8f0;
+}
+
+/* BUTTON */
+button.primary{
+background:linear-gradient(135deg,#facc15,#f59e0b);
+color:#020617;
+border:none;
+padding:10px;
+border-radius:10px;
+width:100%;
+cursor:pointer;
+font-weight:bold;
+}
+
+button.danger{
+background:#ef4444;
+color:white;
+border:none;
+padding:10px;
+border-radius:10px;
+width:100%;
+cursor:pointer;
+}
+
+/* PAGES */
+.page{display:none;}
+#homePage{display:block;}
+
+/* TABLE */
+.table-container{
+width:95%;
+margin:auto;
+background:#020617;
+padding:20px;
+border-radius:15px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #334155;
+}
+
+th{
+color:#facc15;
+}
+</style>
 </head>
 
 <body>
 
-<h1> Event Registration System</h1>
-
-<div class="container">
-    <form onsubmit="return registerUser()">
-
-        <input type="text" id="name" placeholder="Full Name" required>
-
-        <input type="email" id="email" placeholder="Email Address" required>
-
-        <select id="event" required>
-            <option value="">Select Event</option>
-            <option>Tech Fest</option>
-            <option>Workshop</option>
-            <option>Seminar</option>
-            <option>Cultural Program</option>
-        </select>
-
-        <button type="submit">Register</button>
-        <button type="reset">Clear</button>
-
-    </form>
-
-    <p id="message"></p>
+<div class="navbar">
+<button onclick="showPage('homePage')">Home</button>
+<button onclick="showPage('signupPage')">Register</button>
+<button onclick="showPage('loginPage')">Login</button>
+<button onclick="showPage('adminPage')">Admin</button>
+<button onclick="showPage('tablePage')">Participants</button>
 </div>
 
-<div class="footer">
-    © 2026 Event System | Designed for Assignment
+<h1>Event Management System</h1>
+
+<!-- HOME -->
+<div id="homePage" class="page">
+
+<div class="hero">
+<h2>Welcome to Event Management System</h2>
+<p>Manage registrations and monitor participants efficiently</p>
+</div>
+
+<div class="dashboard">
+<div class="stat-card">
+<h2 id="totalUsers">0</h2>
+<p>Total Users</p>
+</div>
+
+<div class="stat-card">
+<h2 id="totalParticipants">0</h2>
+<p>Participants</p>
+</div>
+</div>
+
+<div class="event-preview">
+<div class="event-box">
+<h4>Hackathon</h4>
+<p>Tech Event</p>
+</div>
+
+<div class="event-box">
+<h4>Dance</h4>
+<p>Cultural</p>
+</div>
+
+<div class="event-box">
+<h4>Web Dev</h4>
+<p>Workshop</p>
+</div>
+</div>
+
+</div>
+
+<!-- SIGNUP -->
+<div id="signupPage" class="page card">
+<h3>User Registration</h3>
+
+<input id="name" placeholder="Full Name">
+<input id="email" type="email" placeholder="Email">
+<input id="pass" type="password" placeholder="Password">
+<input id="confirm" type="password" placeholder="Confirm Password">
+
+<select id="category">
+<option value="">Select Category</option>
+<option>Tech</option>
+<option>Cultural</option>
+<option>Workshop</option>
+</select>
+
+<select id="event">
+<option value="">Select Event</option>
+<option>Hackathon</option>
+<option>Dance</option>
+<option>Web Development</option>
+</select>
+
+<button class="primary" onclick="signup()">Create Account</button>
+<p id="signupMsg"></p>
+</div>
+
+<!-- LOGIN -->
+<div id="loginPage" class="page card">
+<h3>User Login</h3>
+
+<input id="loginEmail" type="email" placeholder="Email">
+<input id="loginPass" type="password" placeholder="Password">
+
+<button class="primary" onclick="login()">Login</button>
+<p id="loginMsg"></p>
+</div>
+
+<!-- USER -->
+<div id="userPage" class="page card">
+<h3>User Details</h3>
+
+<input id="uName" readonly>
+<input id="uEmail" readonly>
+<input id="uCategory" readonly>
+<input id="uEvent" readonly>
+
+<button onclick="logout()">Logout</button>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPage" class="page card">
+<h3>Admin Dashboard</h3>
+
+<input id="adminPass" type="password" placeholder="Admin Password">
+<button class="primary" onclick="adminLogin()">Enter</button>
+
+<div id="adminPanel" style="display:none;">
+<p>Total Users: <b id="aUsers"></b></p>
+<p>Total Participants: <b id="aParticipants"></b></p>
+
+<input id="search" placeholder="Search..." oninput="renderAdmin()">
+<ul id="adminList"></ul>
+
+<button class="danger" onclick="clearAll()">Delete All</button>
+</div>
+</div>
+
+<!-- TABLE -->
+<div id="tablePage" class="page">
+<div class="table-container">
+<h3>Participants</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Category</th>
+<th>Event</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
 </div>
 
 <script>
-function registerUser() {
 
-    let name = document.getElementById("name").value;
-    let event = document.getElementById("event").value;
+let users = JSON.parse(localStorage.getItem("users")) || {};
+let data = JSON.parse(localStorage.getItem("data")) || {};
 
-    if(event === "") {
-        alert("Please select an event!");
-        return false;
-    }
-
-    document.getElementById("message").innerText =
-        name + ", you have successfully registered for " + event;
-
-    return false;
+function save(){
+localStorage.setItem("users", JSON.stringify(users));
+localStorage.setItem("data", JSON.stringify(data));
 }
+
+function showPage(id){
+document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+document.getElementById(id).style.display="block";
+updateStats();
+}
+
+function signup(){
+let n=name.value,e=email.value,p=pass.value,c=confirm.value,cat=category.value,ev=event.value;
+
+if(p!==c) return signupMsg.innerText="Passwords do not match";
+
+users[e]={name:n,pass:p,cat,ev};
+data[e]={name:n,email:e,cat,ev};
+
+save();
+signupMsg.innerText="Registered successfully";
+updateStats();
+}
+
+function login(){
+let e=loginEmail.value,p=loginPass.value;
+
+if(users[e] && users[e].pass===p){
+uName.value=users[e].name;
+uEmail.value=e;
+uCategory.value=users[e].cat;
+uEvent.value=users[e].ev;
+
+showPage("userPage");
+}else loginMsg.innerText="Invalid login";
+}
+
+function logout(){
+showPage("homePage");
+}
+
+function adminLogin(){
+if(adminPass.value==="admin123"){
+adminPanel.style.display="block";
+renderAdmin();
+}
+}
+
+function renderAdmin(){
+adminList.innerHTML="";
+let s=search.value?.toLowerCase()||"";
+
+Object.values(data).forEach(d=>{
+if(d.name.toLowerCase().includes(s)||d.email.toLowerCase().includes(s)){
+let li=document.createElement("li");
+li.innerHTML=`${d.name} (${d.ev})
+<button onclick="delUser('${d.email}')">Delete</button>`;
+adminList.appendChild(li);
+}
+});
+}
+
+function delUser(e){
+delete users[e];
+delete data[e];
+save();
+renderAdmin();
+updateTable();
+}
+
+function clearAll(){
+if(confirm("Delete all data?")){
+users={};data={};
+save();
+renderAdmin();
+updateTable();
+}
+}
+
+function updateStats(){
+totalUsers.innerText=Object.keys(users).length;
+totalParticipants.innerText=Object.keys(data).length;
+
+aUsers.innerText=totalUsers.innerText;
+aParticipants.innerText=totalParticipants.innerText;
+
+updateTable();
+}
+
+function updateTable(){
+tableBody.innerHTML="";
+Object.values(data).forEach(d=>{
+tableBody.innerHTML+=`
+<tr>
+<td>${d.name}</td>
+<td>${d.email}</td>
+<td>${d.cat}</td>
+<td>${d.ev}</td>
+</tr>`;
+});
+}
+
+updateStats();
+
 </script>
 
 </body>
