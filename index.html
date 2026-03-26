@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            text-align: center;
+            margin: 0;
+        }
+
+        h1 {
+            color: white;
+            margin-top: 30px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            width: 350px;
+            margin: 40px auto;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+        }
+
+        input, select, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #5a67d8;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #ddd;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1> Event Registration System</h1>
+
+<div class="container">
+    <form onsubmit="return registerUser()">
+
+        <input type="text" id="name" placeholder="Full Name" required>
+
+        <input type="email" id="email" placeholder="Email Address" required>
+
+        <select id="event" required>
+            <option value="">Select Event</option>
+            <option>Tech Fest</option>
+            <option>Workshop</option>
+            <option>Seminar</option>
+            <option>Cultural Program</option>
+        </select>
+
+        <button type="submit">Register</button>
+        <button type="reset">Clear</button>
+
+    </form>
+
+    <p id="message"></p>
+</div>
+
+<div class="footer">
+    © 2026 Event System | Designed for Assignment
+</div>
+
+<script>
+function registerUser() {
+
+    let name = document.getElementById("name").value;
+    let event = document.getElementById("event").value;
+
+    if(event === "") {
+        alert("Please select an event!");
+        return false;
+    }
+
+    document.getElementById("message").innerText =
+        "✅ " + name + ", you have successfully registered for " + event;
+
+    return false;
+}
+</script>
+
+</body>
+</html>
